@@ -1,225 +1,161 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 
-<title>Java 170 Days Study Tracker</title>
-
+<title>Java Developer Journey Tracker</title>
 
 <style>
-
 
 *{
 box-sizing:border-box;
 }
 
-
 body{
-
-font-family:'Segoe UI',sans-serif;
-
-background:
-linear-gradient(135deg,#667eea,#764ba2);
-
 margin:0;
-
 padding:20px;
-
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(135deg,#667eea,#764ba2);
+min-height:100vh;
 }
-
 
 
 .container{
-
-
-max-width:1000px;
-
+max-width:1200px;
 margin:auto;
+}
 
-background:#ffffff;
 
-border-radius:30px;
+.header,.badges{
 
-padding:30px;
-
+background:white;
+padding:25px;
+border-radius:25px;
+box-shadow:0 10px 30px rgba(0,0,0,.2);
 
 }
 
+
+.header{
+
+text-align:center;
+
+}
 
 
 h1{
 
-text-align:center;
-
-color:#4a148c;
-
-font-size:35px;
+color:#6d28d9;
 
 }
 
 
 
-
-
-.hero{
-
+.stats{
 
 display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-gap:20px;
-
+justify-content:center;
+gap:15px;
 flex-wrap:wrap;
-
-
-background:
-
-linear-gradient(135deg,#ff512f,#dd2476);
-
-
-padding:25px;
-
-border-radius:25px;
-
-color:white;
-
+margin-top:20px;
 
 }
 
 
+.stat{
 
-
-
-.streak{
-
-
-font-size:28px;
-
-font-weight:bold;
-
-
-}
-
-
-
-
-button{
-
-
-background:white;
-
-color:#dd2476;
-
-border:none;
-
+background:#ede9fe;
 padding:15px 25px;
-
-border-radius:50px;
-
-font-size:18px;
-
+border-radius:20px;
 font-weight:bold;
 
-cursor:pointer;
-
-
 }
-
-
-
-
-
-button:hover{
-
-
-transform:scale(1.05);
-
-
-}
-
-
-
-
-.progress-card{
-
-
-margin-top:25px;
-
-background:
-
-linear-gradient(135deg,#43cea2,#185a9d);
-
-color:white;
-
-padding:25px;
-
-border-radius:25px;
-
-
-}
-
-
 
 
 
 .progress{
 
-font-size:25px;
-
-font-weight:bold;
-
+height:25px;
+background:#ddd;
+border-radius:20px;
+overflow:hidden;
+margin-top:20px;
 
 }
-
-
-
 
 
 .progress-bar{
 
-
-height:18px;
-
-background:#ffffff55;
-
-border-radius:20px;
-
-overflow:hidden;
-
-
-}
-
-
-
-.progress-fill{
-
-
 height:100%;
-
-background:#fff;
-
 width:0%;
-
+background:linear-gradient(90deg,#22c55e,#16a34a);
+transition:.5s;
 
 }
 
 
 
+
+.cards{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:20px;
+margin-top:30px;
+
+}
+
+
+
+.card{
+
+background:white;
+padding:20px;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,.15);
+transition:.3s;
+
+}
+
+
+.card:hover{
+
+transform:translateY(-8px);
+
+}
+
+
+.done{
+
+background:#dcfce7;
+
+}
+
+
+
+button{
+
+border:none;
+padding:12px 20px;
+border-radius:25px;
+background:#7c3aed;
+color:white;
+cursor:pointer;
+
+}
+
+
+
+button:hover{
+
+background:#4c1d95;
+
+}
 
 
 
 .badges{
 
-
-display:grid;
-
-grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-
-gap:15px;
-
+margin-top:30px;
 
 }
 
@@ -227,90 +163,44 @@ gap:15px;
 
 .badge{
 
-
-padding:20px;
-
+display:inline-block;
+background:#fef3c7;
+padding:10px 15px;
 border-radius:20px;
-
-background:#eee;
-
-text-align:center;
-
-font-weight:bold;
-
-font-size:18px;
-
-
-}
-
-
-
-.active{
-
-
-background:
-
-linear-gradient(135deg,#ffd700,#ff9800);
-
-color:white;
+margin:5px;
 
 }
 
 
 
 
+.popup{
 
-.day{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) scale(0);
 
-
-margin:12px 0;
-
-padding:18px;
-
-border-radius:20px;
-
-background:#f7f7ff;
-
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
+background:white;
+padding:40px;
+border-radius:30px;
+font-size:25px;
+box-shadow:0 20px 50px black;
+transition:.5s;
 
 }
 
 
 
+.popup.show{
 
-
-.weekend{
-
-
-background:#fff8e1;
-
-
-}
-
-
-
-input[type=checkbox]{
-
-
-width:22px;
-
-height:22px;
-
-cursor:pointer;
-
+transform:translate(-50%,-50%) scale(1);
 
 }
 
 
 
 </style>
-
 
 </head>
 
@@ -319,80 +209,43 @@ cursor:pointer;
 <body>
 
 
-
 <div class="container">
 
 
-<h1>
-
-🚀 Java Developer Journey
-
-</h1>
+<div class="header">
 
 
-<div class="hero">
+<h1>🔥 Java Developer Journey</h1>
+
+<p id="start"></p>
 
 
-<div class="streak">
+<div class="stats">
 
-🔥 <span id="streak">0</span>
-
-<br>
-
-Day Streak
-
-
+<div class="stat">
+🔥 Streak : <span id="streak">0</span>
 </div>
 
 
-
-<button onclick="completeToday()">
-
-✅ Complete Today
-
-</button>
-
-
+<div class="stat">
+📚 Completed : <span id="count">0</span>
 </div>
 
 
+<div class="stat">
+🏆 Badges : <span id="badgeCount">0</span>
+</div>
 
 
-
-
-<div class="progress-card">
-
-
-<h2>
-
-📈 Overall Progress
-
-</h2>
+</div>
 
 
 
 <div class="progress">
 
-<span id="progress">
-0
-</span>%
-
+<div class="progress-bar" id="bar"></div>
 
 </div>
-
-
-
-<br>
-
-
-<div class="progress-bar">
-
-<div id="fill" class="progress-fill">
-
-</div>
-
-</div>
-
 
 
 </div>
@@ -400,90 +253,73 @@ Day Streak
 
 
 
-
-
-<h2>
-
-🏆 Achievements
-
-</h2>
+<div class="cards" id="cards"></div>
 
 
 
 <div class="badges">
 
 
-<div id="b3" class="badge">
+<h2>🏆 Earned Badges</h2>
 
-🌱 Starter
+<div id="earned">
 
-<br>
-
-3 Days
+No badges yet
 
 </div>
 
 
 
-<div id="b7" class="badge">
-
-🔥 Warrior
-
-<br>
-
-7 Days
-
-</div>
+<h2>🎯 Available Badges</h2>
 
 
+<div>
 
 
-<div id="b30" class="badge">
-
-🏆 Fighter
-
-<br>
-
-30 Days
-
-</div>
+<span class="badge">
+🌱 Beginner Started - Day 3
+</span>
 
 
+<span class="badge">
+🔥 1 Week Streak - Day 7
+</span>
 
 
-<div id="b60" class="badge">
-
-💎 Expert
-
-<br>
-
-60 Days
-
-</div>
+<span class="badge">
+🚀 OOP Explorer - Day 15
+</span>
 
 
+<span class="badge">
+📚 Java Core Master - Day 30
+</span>
 
 
-<div id="b100" class="badge">
-
-👑 Legend
-
-<br>
-
-100 Days
-
-</div>
+<span class="badge">
+🧩 Collections Warrior - Day 50
+</span>
 
 
+<span class="badge">
+⚡ Java 8 Champion - Day 75
+</span>
 
 
-<div id="b170" class="badge">
+<span class="badge">
+🏆 Backend Developer - Day 100
+</span>
 
-🚀 Java Master
 
-<br>
+<span class="badge">
+🌟 Spring Boot Builder - Day 125
+</span>
 
-170 Days
+
+<span class="badge">
+👑 Java Developer Completed - Day 150
+</span>
+
 
 </div>
 
@@ -493,109 +329,294 @@ Day Streak
 
 
 
-
-
-<h2>
-
-📚 170 Days Roadmap
-
-</h2>
-
-
-
-<div id="roadmap"></div>
-
-
-
 </div>
 
 
 
-
+<div class="popup" id="popup"></div>
 
 
 
 <script>
 
 
-
-
 const topics=[
 
-"Java History JVM JDK JRE",
+"Java History, JVM, JDK, JRE",
 "Variables",
 "Data Types",
 "Operators",
-"If Else",
+"If-Else",
 "Loops",
 "Arrays",
 "Class and Object",
 "Constructors",
+"Method Overloading",
 "Inheritance",
 "Polymorphism",
 "Abstraction",
 "Interface",
 "Encapsulation",
-"Collections",
+"Access Modifiers",
+"Static Keyword",
+"Final Keyword",
+"this and super",
+"Packages",
+"String Basics",
+"String Pool",
+"String vs StringBuilder",
+"StringBuffer",
+"String Immutability",
+"String Interview Questions",
+"Collection Framework Overview",
+"List Interface",
 "ArrayList",
 "LinkedList",
+"ArrayList vs LinkedList",
+"Vector",
+"Set Interface",
+"HashSet",
+"LinkedHashSet",
+"TreeSet",
+"Iterator",
+"Comparable",
+"Comparator",
+"Map Interface",
 "HashMap",
+"HashMap Internals",
+"equals and hashCode",
+"LinkedHashMap",
+"TreeMap",
+"ConcurrentHashMap",
+"Fail Fast vs Fail Safe",
+"Collection Interview Questions",
+"Collections Practice",
+"Collections Practice",
+"Collections Practice",
 "Exception Handling",
+"Checked Exceptions",
+"Unchecked Exceptions",
+"Final Finally Finalize",
+"Wrapper Classes",
+"Autoboxing",
 "File Handling",
-"Lambda",
-"Stream API",
-"SQL Basics",
-"Joins",
+"Serialization",
+"Deserialization",
+"Transient",
+"Cloneable",
+"Deep Copy vs Shallow Copy",
+"Functional Interfaces",
+"Lambda Expressions",
+"Method References",
+"Stream Basics",
+"map()",
+"filter()",
+"flatMap()",
+"Collectors",
+"Optional",
+"Parallel Streams",
+"Java 8 Interview Questions",
+"Java 8 Practice",
+"Database Basics",
+"Primary Key and Foreign Key",
+"Normalization",
+"Denormalization",
+"Inner Join",
+"Left Join",
+"Right Join",
+"Self Join",
+"Group By",
+"Having",
+"Subquery",
+"Correlated Subquery",
 "Indexes",
-"Spring Boot",
-"REST API",
-"JPA",
-"Hibernate",
-"JVM",
-"Threads",
-"Multithreading",
-"System Design",
-"Mock Interview",
+"Composite Index",
+"Query Optimization",
+"ACID Properties",
+"Transactions",
+"Isolation Levels",
+"Window Functions",
+"CTE",
+"Execution Plan",
+"group_concat",
+"SQL Mock Interview",
+"SQL Practice",
+"Spring Architecture",
+"IOC Container",
+"Dependency Injection",
+"Bean Lifecycle",
+"Bean Scope",
+"Component Service Repository",
+"REST APIs",
+"Request Mapping",
+"Validation",
+"Exception Handling in Spring",
+"Configuration Properties",
+"Profiles",
+"JPA Basics",
+"Entity Relationships",
+"Repository Layer",
+"Fetch Types",
+"Cascade Types",
+"Lazy vs Eager",
+"Transactions in Spring",
+"N+1 Problem",
+"Caching Basics",
+"Hibernate Interview Questions",
+"JPA Practice",
+"JPA Practice",
+"JVM Architecture",
+"Heap Memory",
+"Stack Memory",
+"Class Loaders",
+"Garbage Collection",
+"Memory Leaks",
+"Thread Basics",
+"Runnable vs Thread",
+"Synchronization",
+"Volatile",
+"Deadlock",
+"Executor Framework",
+"Callable",
+"Future",
+"CompletableFuture",
+"Multithreading Practice",
+"Multithreading Interview Questions",
+"Resume Preparation",
+"Project Explanation",
+"Core Java Mock",
+"Collections Mock",
+"Java 8 Mock",
+"SQL Mock",
+"Spring Mock",
+"Mixed Mock Interview",
+"System Design Basics",
 "Final Revision"
 
 ];
 
 
 
+let data=JSON.parse(localStorage.getItem("javaTracker"))||{
 
-let roadmap=[];
+completed:[],
+last:null,
+streak:0,
+badges:[]
 
-let t=0;
-
-
-for(let i=1;i<=170;i++){
-
-
-let d=new Date();
-
-d.setDate(d.getDate()+i);
+};
 
 
 
-if(d.getDay()==0 || d.getDay()==6){
+let start=new Date();
+
+start.setDate(start.getDate()+1);
 
 
-roadmap.push(
-"🔁 Weekend Revision"
-);
 
+document.getElementById("start").innerHTML=
+"Starts : "+start.toDateString();
+
+
+
+function today(){
+
+return new Date().toISOString().split("T")[0];
 
 }
 
+
+
+function save(){
+
+localStorage.setItem("javaTracker",JSON.stringify(data));
+
+}
+
+
+
+function updateStreak(){
+
+
+let t=today();
+
+
+if(data.last){
+
+let diff=(new Date(t)-new Date(data.last))/86400000;
+
+
+if(diff>1)
+data.streak=0;
+
+
+if(diff==1)
+data.streak++;
+
+
+}
 else{
 
+data.streak=1;
 
-roadmap.push(
-topics[t] || "Practice"
-);
+}
 
 
-t++;
+data.last=t;
+
+
+}
+
+
+
+
+function unlock(){
+
+
+let c=data.completed.length;
+
+
+let badge="";
+
+
+if(c>=3) badge="🌱 Beginner Started";
+
+if(c>=7) badge="🔥 1 Week Streak";
+
+if(c>=15) badge="🚀 OOP Explorer";
+
+if(c>=30) badge="📚 Java Core Master";
+
+if(c>=50) badge="🧩 Collections Warrior";
+
+if(c>=75) badge="⚡ Java 8 Champion";
+
+if(c>=100) badge="🏆 Backend Developer";
+
+if(c>=125) badge="🌟 Spring Boot Builder";
+
+if(c>=150) badge="👑 Java Developer Completed";
+
+
+
+if(badge && !data.badges.includes(badge)){
+
+
+data.badges.push(badge);
+
+
+let p=document.getElementById("popup");
+
+p.innerHTML="🎉 "+badge+" Unlocked!";
+
+p.classList.add("show");
+
+
+setTimeout(()=>{
+
+p.classList.remove("show");
+
+},2000);
 
 
 }
@@ -606,72 +627,71 @@ t++;
 
 
 
-let data=
-
-JSON.parse(localStorage.getItem("study")) || {};
+function complete(i){
 
 
+if(!data.completed.includes(i)){
 
 
+data.completed.push(i);
 
-let streak=0;
+updateStreak();
 
-let last="";
+unlock();
 
-
-
-if(localStorage.getItem("realStreak")){
+save();
 
 
-streak=
-Number(localStorage.getItem("streak"));
+}
 
-last=
-localStorage.getItem("last");
+
+render();
 
 
 }
 
 
 
-
-
-
-
-function load(){
-
+function render(){
 
 
 let html="";
 
+let d=new Date(start);
 
 
-roadmap.forEach((x,i)=>{
+
+topics.forEach((t,i)=>{
+
+
+if(d.getDay()==0){
+
+t="Sunday Revision , "+t;
+
+}
+
+
+
+let done=data.completed.includes(i);
+
 
 
 html+=`
 
-<div class="day ${x.includes("Weekend")?'weekend':''}">
+<div class="card ${done?'done':''}">
+
+<h3>Day ${i+1}</h3>
+
+<p>${d.toDateString()}</p>
+
+<h4>${t}</h4>
 
 
-<span>
+<button onclick="complete(${i})">
 
-<b>
-Day ${i+1}
-</b>
+${done?"Completed ✅":"Mark Complete"}
 
-<br>
-
-${x}
-
-</span>
-
-
-<input type="checkbox"
-
-${data[i]?"checked":""}
-
-onclick="save(${i})">
+</button>
 
 
 </div>
@@ -681,190 +701,47 @@ onclick="save(${i})">
 
 
 
-});
-
-
-
-document.getElementById("roadmap")
-.innerHTML=html;
-
-
-update();
-
-
-}
-
-
-
-
-
-
-
-
-function save(i){
-
-
-data[i]=!data[i];
-
-
-localStorage.setItem(
-
-"study",
-
-JSON.stringify(data)
-
-);
-
-
-update();
-
-
-}
-
-
-
-
-
-
-
-
-function completeToday(){
-
-
-
-let today=
-new Date().toDateString();
-
-
-let yesterday=
-new Date();
-
-
-yesterday.setDate(
-yesterday.getDate()-1
-);
-
-
-
-if(last!=today){
-
-
-if(last==yesterday.toDateString())
-
-streak++;
-
-
-else
-
-streak=1;
-
-
-
-last=today;
-
-
-
-localStorage.setItem("streak",streak);
-
-localStorage.setItem("last",last);
-
-localStorage.setItem("realStreak","yes");
-
-
-
-}
-
-
-
-update();
-
-
-
-}
-
-
-
-
-
-
-
-
-function update(){
-
-
-let done=0;
-
-
-
-Object.values(data)
-.forEach(x=>{
-
-if(x)
-
-done++;
-
-});
-
-
-
-let percent=
-
-Math.round(done/170*100);
-
-
-
-document.getElementById("progress")
-.innerHTML=percent;
-
-
-
-document.getElementById("fill")
-.style.width=percent+"%";
-
-
-
-document.getElementById("streak")
-.innerHTML=streak;
-
-
-
-[
-["b3",3],
-["b7",7],
-["b30",30],
-["b60",60],
-["b100",100],
-["b170",170]
-
-]
-.forEach(x=>{
-
-
-if(streak>=x[1])
-
-document
-.getElementById(x[0])
-.classList.add("active");
+d.setDate(d.getDate()+1);
 
 
 });
 
 
 
+document.getElementById("cards").innerHTML=html;
+
+
+document.getElementById("streak").innerHTML=data.streak;
+
+document.getElementById("count").innerHTML=data.completed.length;
+
+document.getElementById("badgeCount").innerHTML=data.badges.length;
+
+
+document.getElementById("earned").innerHTML=
+
+data.badges.length?
+
+data.badges.map(x=>`<span class="badge">${x}</span>`).join("")
+
+:"No badges yet";
+
+
+
+document.getElementById("bar").style.width=
+
+(data.completed.length/topics.length*100)+"%";
+
+
 }
 
 
-
-
-load();
-
+render();
 
 
 </script>
 
 
-
 </body>
-
 
 </html>
